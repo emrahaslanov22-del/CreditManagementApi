@@ -1,0 +1,6 @@
+@CreditManagementApi_HostAddress = http://localhost:5070
+
+GET {{CreditManagementApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
