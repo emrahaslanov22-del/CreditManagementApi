@@ -2,6 +2,7 @@
 using CreditManagementApi.Dtos;
 using CreditManagementApi.Entities;
 using CreditManagementApi.Services.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,8 @@ namespace CreditManagementApi.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize]
+   
     public class DebtorsController : ControllerBase
     {
         private readonly IDebtorService _service;

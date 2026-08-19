@@ -1,9 +1,10 @@
 ﻿using CreditManagementApi.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CreditManagementApi.Context
 {
-    public class DebtorContext : DbContext
+    public class DebtorContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Debtor> debtors { set; get; }
 
