@@ -20,22 +20,22 @@ namespace CreditManagementApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Repository
+            
             builder.Services.AddScoped<IDebtorRepository, DebtorRepository>();
 
-            // Service
+           
             builder.Services.AddScoped<IDebtorService, DebtorService>();
 
-            // AutoMapper
+           
             builder.Services.AddAutoMapper(cfg =>
             {
                 cfg.AddProfile<DebtorMapper>();
             });
 
-            // Controllers
+           
             builder.Services.AddControllers();
 
-            // Swagger
+            
             builder.Services.AddEndpointsApiExplorer();
 
             builder.Services.AddSwaggerGen(options =>
@@ -46,7 +46,7 @@ namespace CreditManagementApi
                     Version = "v1"
                 });
 
-                // JWT Authentication
+               
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",
@@ -57,7 +57,7 @@ namespace CreditManagementApi
                     Description = "JWT token daxil edin."
                 });
 
-                // Swagger endpoint-lərə JWT göndərsin
+             
                 options.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {
@@ -74,14 +74,14 @@ namespace CreditManagementApi
                 });
             });
 
-            // Database
+            
             var connection = builder.Configuration
                 .GetConnectionString("DebtorConnection");
 
             builder.Services.AddDbContext<DebtorContext>(options =>
                 options.UseSqlServer(connection));
 
-            // Identity
+           
             builder.Services.AddIdentityCore<ApplicationUser>(options =>
             {
                 options.Password.RequireDigit = true;
@@ -123,22 +123,20 @@ namespace CreditManagementApi
 
             var app = builder.Build();
 
-            // Swagger
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
-            // Middleware
+           
             app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 
-            // JWT Authentication
+           
             app.UseAuthentication();
 
-            // Authorization
             app.UseAuthorization();
 
             app.UseMiddleware<RequestLoggingMiddleware>();
